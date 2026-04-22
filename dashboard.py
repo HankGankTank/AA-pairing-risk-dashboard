@@ -12,14 +12,14 @@ def load_data():
     DATA_FILENAME = Path(__file__).parent / 'data' / 'Pair_risk_index_data.csv'
     
     if not DATA_FILENAME.exists():
-        st.error(f"找不到文件: {DATA_FILENAME}")
+        st.error(f"Unablt to find the file: {DATA_FILENAME}")
         return None
     
     df = pd.read_csv(DATA_FILENAME)
     df.columns = df.columns.str.strip()
     
     if 'FlightDate' not in df.columns:
-        st.error(f"文件中缺少 'FlightDate' 列！当前找到的列有: {list(df.columns)}")
+        st.error(f"Unable to find the column 'FlightDate' Curently only found: {list(df.columns)}")
         st.stop()
         
     df['FlightDate'] = pd.to_datetime(df['FlightDate'])
@@ -59,7 +59,7 @@ else:
             final_data = match.iloc[0]
             
             # --- 主界面展示 ---
-            st.title("✈️ Flytplan: Flight Connection Risk Assessment")
+            st.title("✈️ Flight Connection Risk Assessment")
             col1, col2 = st.columns([2, 1])
 
             with col1:
@@ -90,4 +90,4 @@ else:
                     </div>
                 """, unsafe_allow_html=True)
         else:
-            st.error("无法找到匹配的航班组合。")
+            st.error("Unable to find the paired flight")
