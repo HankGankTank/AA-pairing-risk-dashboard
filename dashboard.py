@@ -6,7 +6,7 @@ from pathlib import Path
 # 页面基本配置
 st.set_page_config(page_title="Flight Connection Risk Dashboard", layout="wide")
 
-# 1. 数据加载与缓存 (针对 100万+ 行数据优化)
+# 1. 数据加载与缓存
 #@st.cache_data
 
 #def load_airport_dict():
@@ -122,6 +122,7 @@ else:
                 st.line_chart(history_df.set_index('FlightDate')['Pair_Risk_Index'])
 
             with col2:
+                # 风险数值
                 st.subheader("Risk Prediction")
                 risk_score = final_data['Pair_Risk_Index']
                 risk_level = final_data['Pair_Risk_Level']
