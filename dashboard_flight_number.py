@@ -60,6 +60,9 @@ def load_data():
 
 df = load_data()
 
+# 提取风险指数最高的 20 行数据
+top_20_risk = df.nlargest(20, 'Pair_Risk_Index')
+
 # --- 1. 加载航班号映射 (新增加的部分) ---
 @st.cache_data
 def load_flight_mapping():
@@ -173,7 +176,7 @@ else:
                 st.subheader("Risk Prediction")
                 risk_score = final_data['Pair_Risk_Index']
                 risk_level = final_data['Pair_Risk_Level']
-                color = "red" if risk_level == "High" else "orange" if risk_level == "Medium" else "green"
+                color = "red" if risk_level == "High" else "orange" if risk_level == "Median" else "green"
                 
                 st.markdown(f"""
                     <div style="background-color:#f0f2f6; padding: 20px; border-radius: 10px; text-align: center;">
@@ -182,5 +185,14 @@ else:
                         <p style="font-size: 24px; font-weight: bold; color: {color};">Risk Level: {risk_level}</p>
                     </div>
                 """, unsafe_allow_html=True)
+
+                st.subheader("🚨 Top 20 High-Risk Connections")
+
+                # 提取前 20 名，并只选取你想展示给用户看的关键列
+                columns_to_show = ['FlightDate', 'in_route', 'out_route', 'interval_min', 'Pair_Risk_Index', 'Pair_Risk_Level']
+                display_df = df.nlargest(20, 'Pair_Risk_Index')[columns_to_show]
+
+                # 在网页上渲染这个表格
+                st.dataframe(display_df, use_container_width=True)
         else:
             st.error("Unable to find the paired flight")

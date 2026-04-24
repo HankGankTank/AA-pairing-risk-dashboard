@@ -1,7 +1,7 @@
 
 A simple Streamlit app showing the risk data of AA pairing flights
 
-[![Open in Streamlit](https://aa-pairing-risk-dashboard-ctyqs.streamlit.app/)
+[![Open in Streamlit](https://aa-pairing-risk-dashboard-ctyqs.streamlit.app/)]
 
 ### How to run it on your own machine
 
