@@ -126,7 +126,7 @@ else:
                 st.subheader("Risk Prediction")
                 risk_score = final_data['Pair_Risk_Index']
                 risk_level = final_data['Pair_Risk_Level']
-                color = "red" if risk_level == "High" else "orange" if risk_level == "Medium" else "green"
+                color = "red" if risk_level == "High" else "orange" if risk_level == "Median" else "green"
                 
                 st.markdown(f"""
                     <div style="background-color:#f0f2f6; padding: 20px; border-radius: 10px; text-align: center;">
